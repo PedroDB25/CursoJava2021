@@ -477,6 +477,8 @@ modificamos.
 Este es el resumen de lo fundamental que vimos en la clase del viernes 30/04/21
 
 --Anexo: Crear nuestra propia ExCEPTION.
+link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
+
 Lo primero que hacemos es en un bloque try-catch, en el apartado catch agregar la linea
 
 	throw new AccesoDatosException("No se han podido obtener todos los clientes", e);
