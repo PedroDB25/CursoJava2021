@@ -476,6 +476,17 @@ modificamos.
 
 Este es el resumen de lo fundamental que vimos en la clase del viernes 30/04/21
 
+--Anexo: Crear nuestra propia ExCEPTION.
+Lo primero que hacemos es en un bloque try-catch, en el apartado catch agregar la linea
+
+	throw new AccesoDatosException("No se han podido obtener todos los clientes", e);
+
+Ahora nos saltaran errores por usar AccesoDatosException sin que esta clase exista, pero dentro de las opciones generadas por eclipse o VSC, nos diran que creemos esta clase.
+Como el programa detecta que queremos hacer una excepcion nos crea la clase con el herencia de exceptions (si no, nosotros la agregamos), pero necesitamos que esta clase herede de RuntimeException, por lo que lo cambiamos.
+Ahora le heredamos los constructores de la clase padre.
+
+y con esto tenemos nuestra Excepcion creada.
+
 
 
 
