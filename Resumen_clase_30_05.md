@@ -1,18 +1,18 @@
-Índice: 
--Configuración
--Crear base de datos
--Crear Entidades
--Capa de acceso a datos
-	-Variables de conexion
-	-Variables de Sentencias SQL
-	-Métodos Para acceso a datos
-		-obtenerTodos()
-		- obtenerPorId()
-		-insertar()
-		-modificar()
-		-borrar ()
--Capa de Presentación
--Anexo
+	Índice: 
+	-Configuración
+	-Crear base de datos
+	-Crear Entidades
+	-Capa de acceso a datos
+		-Variables de conexion
+		-Variables de Sentencias SQL
+		-Métodos Para acceso a datos
+			-obtenerTodos()
+			- obtenerPorId()
+			-insertar()
+			-modificar()
+			-borrar ()
+	-Capa de Presentación
+	-Anexo
 
 
 Esta guía es para poder practicar la conexión con la base de datos SQLITE, es importante ir mirando los archivos subidos al github mientras avanzamos.
@@ -21,7 +21,10 @@ Esta guía es para poder practicar la conexión con la base de datos SQLITE, es 
 --Configuración--
 
 
-Lo primero que necesitas es descargar el driver que conecta java con SQLITE desde la pagina: https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc 
+Lo primero que necesitas es descargar el driver que conecta java con SQLITE desde la pagina: 
+
+	https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc 
+	
 En esta pagina buscas el ultimo, abres la pagina y luego apretas el jar (Esta en la tabla en el campo de FILE)
 
 Este archivo .jar lo dejas dentro de tu proyecto. (En clase creamos una carpeta llamada "lib" y dejamos el .jar ahí)
@@ -36,7 +39,11 @@ Con la configuración creada ya podemos crear la base de datos, para esto usamos
 --Crear Base de datos--
 
 
-Si no quieres crearla, puedes descargarla de aqui: https://github.com/javierlete/java-2021-04/tree/master/BasesDeDatos y ponerla en tu proyecto el archivo es: tienda.db
+Si no quieres crearla, puedes descargarla de aqui: 
+
+	https://github.com/javierlete/java-2021-04/tree/master/BasesDeDatos 
+	
+y ponerla en tu proyecto el archivo es: tienda.db
 
 Para el ejemplo creamos una tabla "tienda.db" que tiene 3 columnas (id, nombre, apellido) usaremos el dato id de primary key (lo que significa que este es el único dato que no puede repetirse.) Además le añadiremos la opción de ser autoincremental. (por lo que la base de datos lo añadirá por sí sola, cada vez que agreguemos alguien a la tabla.)
 
@@ -44,13 +51,15 @@ Con la configuración hecha y una base de datos podemos empezar a programar.
 
 
 --Crear Entidad--
-link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java
+
+	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java
 
 
 Lo primero que haremos es crear una clase para depositar los datos. Esta clase se creará en un paquete dentro de SRC que se llamará Entidades. La clase debe tener las mismas variables que columnas creadas en la tabla. Creamos los Gettets y Setters, un constructor con todas las variables y un método ToString para visualizar los datos.
 
 --Capa de acceso a datos-- (Dao)
-link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java
+
+	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java
 
 -Variables de conexion
 
@@ -105,8 +114,8 @@ Mientras que la DELETE dice: "Borra de la tabla, el id siguiente."
 
 Siguiendo en las líneas ahora toca mirar los métodos que utilizó y el porqué de cada línea. El primer método de esta capa es ObtenerTodos() :
 
-public static ArrayList<Cliente> obtenerTodos() {
-	try (Connection con = obtenerConexion();
+	public static ArrayList<Cliente> obtenerTodos() {
+		try (Connection con = obtenerConexion();
 			PreparedStatement ps = con.prepareStatement(SQL_SELECT);
 			ResultSet rs = ps.executeQuery()) {
 		ArrayList<Cliente> clientes = new ArrayList<>();
@@ -117,7 +126,8 @@ public static ArrayList<Cliente> obtenerTodos() {
 	} catch (Exception e) {
 		throw new AccesoDatosException("No se han podido obtener todos los clientes", e);
 	}
-}
+	}
+
 Lo primero que tienes que ver es que es un método: -public (O sea que se puede acceder desde fuera de la clase). -Static (o sea que no requiere un objeto para poder llamarlo) -ArrayList (Significa que para cerrar el método debe haber un "return" de un arraylist del objeto clientes)
 
 Entrando en el método, lo primero que vemos es que hay un Try-catch pero que es una especial ya que su sintaxis es:
@@ -129,15 +139,15 @@ Esta es una try-with-resources, su gracia es que lo que se encuentra dentro del 
 
 La primera línea dentro del paréntesis del try es: Connection con = obtenerConexion(); Esto es crear un Objeto Connection con el nombre con, que es iniciado con el método obtenerConexion(). Al ir a este método vemos que tiene la siguiente forma:
 
-private static Connection obtenerConexion() {
-	Connection con = null;
-	try {
-		con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-	} catch (Exception e) {
-		throw new AccesoDatosException("Error en la conexión a clientes", e);
+	private static Connection obtenerConexion() {
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+		} catch (Exception e) {
+			throw new AccesoDatosException("Error en la conexión a clientes", e);
+		}
+		return con;
 	}
-	return con;
-}
 
 Vemos que es un método privado (no se puede llamar fuera de esta clase) y devuelve un objeto tipo Connection Este método inicia creando un objeto vacío de tipo Connection el cual rellenaremos en este método. Aquí encontramos un try-catch normal, pero con la particularidad de que le agregamos al bloque catch una excepciones que creamos nosotros "AccesoDatosException".
 
@@ -181,19 +191,19 @@ Este método se utiliza si no existieran los try-with-resources. pero cómo si e
 
 El segundo método es el ObtenerPorId, que a diferencia del método anterior, este devuelve solo una fila elegida por el id entregado, el método tiene esta forma.
 
-public static Cliente obtenerPorId(Integer id) {
-	try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
-	ps.setInt(1, id);
-	ResultSet rs = ps.executeQuery();
-	Cliente cliente = null;
-	if (rs.next()) { 
-		cliente = new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellidos"));
+	public static Cliente obtenerPorId(Integer id) {
+		try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		Cliente cliente = null;
+		if (rs.next()) { 
+			cliente = new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellidos"));
+			}
+		return cliente; 
+		} catch (Exception e) {
+		throw new AccesoDatosException("La operación de obtener cliente por id ha fallado", e); 
 		}
-	return cliente; 
-	} catch (Exception e) {
-	throw new AccesoDatosException("La operación de obtener cliente por id ha fallado", e); 
 	}
-}
 
 Este método nuevamente es public y static. pero devuelve un solo objeto de tipo Cliente, además recibe de parámetro un Integer "id"
 
@@ -241,20 +251,16 @@ Este método usa muchos términos que ya están explicados en los otros métodos
 		
 		ps.setString(1, cliente.getNombre());
 		ps.setString(2, cliente.getApellidos());
-
 		ps.executeUpdate();
-
+		
 		ResultSet rs = ps.getGeneratedKeys();
-
 		rs.next();
-
 		cliente.setId(rs.getInt(1));
-
 		return cliente;
 	} catch (Exception e) {
 		throw new AccesoDatosException("La operación de insertar cliente ha fallado", e);
 	}
-}
+	}
 Nuevamente iniciamos con el try-with-resources para cerrar las operaciones que requieren un cierre explícito. en las que van el método para conectarse y la preparación de la sentencia SQL.
 
 	Connection con = obtenerConexion();
@@ -284,19 +290,17 @@ en estas líneas estamos solicitando el id autogenerado por la tabla y se lo ins
 
 Este método es muy similar al anterior.
 
-public static Cliente modificar(Cliente cliente) {
-	try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
-		ps.setString(1, cliente.getNombre());
-		ps.setString(2, cliente.getApellidos());
-		ps.setInt(3, cliente.getId());
-
-		ps.executeUpdate();
-
-		return cliente;
+	public static Cliente modificar(Cliente cliente) {
+		try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getApellidos());
+			ps.setInt(3, cliente.getId());
+			ps.executeUpdate();
+			return cliente;
 	} catch (Exception e) {
 		throw new AccesoDatosException("La operación de modificar cliente ha fallado", e);
 	}
-}
+	}
 tenemos un método public que retorna un objeto de tipo cliente y recibirá de parámetro un objeto de tipo cliente.
 
 nuevamente iniciamos con el try-with-resources al cual le pasamos los métodos de apertura de conexión y generación de sentencia SQL.
@@ -321,15 +325,15 @@ y retornamos el mismo objeto de tipo Cliente que entregamos. (nuevamente el retu
 
 Este es el método más corto y comparte casi todo con los métodos vistos antes.
 
-public static void borrar(Integer id) {
-	try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
-		ps.setInt(1, id);
+	public static void borrar(Integer id) {
+		try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
+			ps.setInt(1, id);
 
-		ps.executeUpdate();
-	} catch (Exception e) {
-		throw new AccesoDatosException("La operación de borrar cliente ha fallado", e);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			throw new AccesoDatosException("La operación de borrar cliente ha fallado", e);
+		}
 	}
-}
 Es un método public, pero esta vez no tiene retorno y recibe un Integer id como parámetro. nuevamente iniciamos con el bloque try-with-resources
 
 que tiene en el paréntesis los bloques para la conexión y preparar la sentencia SQL
@@ -345,7 +349,9 @@ y finalmente ejecutamos la sentencia:
 	ps.executeUpdate();
 	
 	
---Capa de Presentación. link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java
+--Capa de Presentación. 
+
+	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java
 
 
 Ahora que hemos generado los métodos para acceder a la información y la entidad que transporta los métodos podemos enfocarnos en la capa de presentación. (o sea, una capa donde solo ejecutaremos los métodos y podremos acceder a la información en muy pocas líneas.)
@@ -354,15 +360,13 @@ Como podemos ver esta clase tiene el método main, por ende es la única clase q
 
 Ya comenzando a llamar a los métodos lo primero que se hizo fue crear un método mostrarTodos(), con el cual ir mostrando los cambios que se generan en la base de datos, cuando realizamos las sentencias.
 
-private static void mostrarTodos() {
+	private static void mostrarTodos() {
 	ArrayList<Cliente> clientes = DaoCliente.obtenerTodos();
-
 	System.out.println("MOSTRANDO TODOS");
-
 	for (Cliente cliente : clientes) {
 		System.out.println(cliente);
 	}
-}
+	}
 Este es un método public, void y que no recibe parámetros. aquí generamos un ArrayList de tipo Cliente, para recibir el ArrayList que retorna el método obtenerTodos() y para imprimirlo en pantalla utilizamos un bucle for, que recorra el ArrayList y los imprima en pantalla.
 
 Comenzando el método main, vemos que la primera línea es un bloque try-catch, que utilizaremos para atajar los errores que puedan salir.
@@ -400,7 +404,9 @@ finalmente utilizamos el método borrar() y le pasamos de parámetro el id del m
 	
 Este es el resumen de lo fundamental que vimos en la clase del viernes 30/04/21
 
---Anexo: Crear nuestra propia ExCEPTION. link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
+--Anexo: Crear nuestra propia ExCEPTION. 
+
+	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
 
 Lo primero que hacemos es en un bloque try-catch, en el apartado catch agregar la linea
 
