@@ -1,3 +1,4 @@
+	
 	Índice: 
 	-Configuración
 	-Crear base de datos
@@ -86,25 +87,26 @@ Las siguientes 5 líneas son las Sentencias SQL que usaremos para este ejemplo:
 Notar que las interrogaciones "?" son puntos donde luego insertamos datos. 
 
 
-Para un mejor entendimiento la sintaxis de cada operación sería: (Esta parte puedes saltarla si sabes de SQL, puedes saltar a la línea 102)
+Para un mejor entendimiento la sintaxis de cada operación sería: (Esta parte puedes saltarla si sabes de SQL, puedes saltar a la línea 115)
 
 (La sentencia debe quedar igual a las de arriba, cualquier símbolo extra los agregue para poder separar conceptos)
 
-SQL_SELECT = "SELECT [CAMPOS_DE_LA_TABLA] FROM [TABLA];
+	SQL_SELECT = "SELECT [CAMPOS_DE_LA_TABLA] FROM [TABLA];
 
 Aquí la sentencia quiere decir: "Selecciona las columnas que te digo de esta tabla"
 
-SQL_SELECT_ID = SQL_SELECT + " WHERE id = ?"; Y (Reutilizamos la línea anterior)
+	SQL_SELECT_ID = SQL_SELECT + " WHERE id = ?"; Y (Reutilizamos la línea anterior)
 
 La sentencia WHERE esta para dar la condición, o sea esta sentencia dice: "Dame todas las columnas y entre ellas elige la fila que tenga el id que te digo" Recordar que las interrogaciones son para dejar un espacio donde agregar datos luego.
 
-SQL_INSERT = "INSERT INTO [TABLA] ([Columnas_a_rellenar]) VALUES ([Tantas "?" como columnas pusiste antes separadas por comas])";
+	SQL_INSERT = "INSERT INTO [TABLA] ([Columnas_a_rellenar]) VALUES ([Tantas "?" como columnas pusiste antes separadas por comas])";
 
 Esta es la sentencia de insertar, aquí la sentencia dice: "Inserta en la tabla y en las siguientes columnas estos valores"
 
 Estas sentencias las pongo juntas debido a que ambas tienen el riesgo de que si no agregas el WHERE del final "destruirás" la tabla.
 
-SQL_UPDATE = "UPDATE [TABLA] SET [Columna] = ?"; SQL_DELETE = "DELETE FROM [TABLA] WHERE id = ?";
+	SQL_UPDATE = "UPDATE [TABLA] SET [Columna] = ?";
+	SQL_DELETE = "DELETE FROM [TABLA] WHERE id = ?";
 
 La sentencia UPDATE dice: " actualiza la tabla con la siguiente información"
 
