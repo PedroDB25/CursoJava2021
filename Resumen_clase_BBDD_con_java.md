@@ -1,5 +1,6 @@
 	
-	Índice: 
+##Índice: 
+
 	-Configuración
 	-Crear base de datos
 	-Crear Entidades
@@ -19,7 +20,7 @@
 Esta guía es para poder practicar la conexión con la base de datos SQLITE, es importante ir mirando los archivos subidos al github mientras avanzamos.
 
 
---Configuración--
+##--Configuración--
 
 
 Lo primero que necesitas es descargar el driver que conecta java con SQLITE desde la pagina: 
@@ -31,13 +32,15 @@ En esta pagina buscas el ultimo, abres la pagina y luego apretas el jar (Esta en
 Este archivo .jar lo dejas dentro de tu proyecto. (En clase creamos una carpeta llamada "lib" y dejamos el .jar ahí)
 
 Con el archivo en el proyecto debes configurar el BuildPath para que java pueda usar el driver de SQLite.
--Eclipse: al dar click derecho en el .jar te dará una opción para agregarlo fácilmente. Se creará un nuevo fichero en el proyecto que te confirmara que el driver se podrá usar en tu proyecto. 
--VSC: cuando creas el proyecto en java abajo en la barra de explorador debe aparecer una barra que dice JAVA proyects ahi puedes referenciar la librería del .jar
+
+		-Eclipse: al dar click derecho en el .jar te dará una opción para agregarlo fácilmente. Se podrá visualizar en como "librerías referenciadas" lo que te confirmará que el driver se podrá usar en tu proyecto. 
+		
+		-VSC: cuando creas el proyecto Java abajo en la barra de explorador debe aparecer una barra que dice JAVA proyects ahi puedes referenciar la librería del .jar
 
 Con la configuración creada ya podemos crear la base de datos, para esto usamos en clase DBeaver, pero se puede usar cualquier herramienta para administrar bases de datos por ejemplo SQLBrowser.
 
 
---Crear Base de datos--
+##--Crear Base de datos--
 
 
 Si no quieres crearla, puedes descargarla de aqui: 
@@ -51,20 +54,20 @@ Para el ejemplo creamos una tabla "tienda.db" que tiene 3 columnas (id, nombre, 
 Con la configuración hecha y una base de datos podemos empezar a programar.
 
 
---Crear Entidad--
+##--Crear Entidad--
 
-	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java
+	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java
 
 
-Lo primero que haremos es crear una clase para depositar los datos. Esta clase se creará en un paquete dentro de SRC que se llamará Entidades. La clase debe tener las mismas variables que columnas creadas en la tabla. Creamos los Gettets y Setters, un constructor con todas las variables y un método ToString para visualizar los datos.
+Lo primero que haremos es crear una clase para depositar los datos. Esta clase se creará en un paquete dentro de SRC que se llamará "entidades". La clase debe tener las mismas variables que columnas creadas en la tabla. Creamos los Gettets y Setters, un constructor con todas las variables y un método ToString() para visualizar los datos, es recomendable que agregues los métodos "equals()" y "hashcode".
 
---Capa de acceso a datos-- (Dao)
+##--Capa de acceso a datos-- (Dal)
 
-	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java
+	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java
 
--Variables de conexion
+###-Variables de conexion
 
-Con la entidad terminada, crearemos la capa de "acceso a datos" la que llamamos "Dao". (data access object) Para esto crearemos una clase llamada Dao con un sufijo deseado (Puede ser DaoRopa, DaoCasa, DaoClientes, Etc...) La Clase Dao empieza como todas las clases definiendo las Constantes y variables.
+Con la entidad terminada, crearemos la capa de "acceso a datos" la que llamamos "Dal". (data access layer) Para esto crearemos una clase llamada Dao con un sufijo deseado (Puede ser DaoRopa, DaoCasa, DaoClientes, Etc...) La Clase Dao empieza como todas las clases definiendo las Constantes y variables.
 
 Las primeras 3 Constantes de esta clase son las constantes de conexión las cuales son URL, USUARIO y PASSWORD. estas se ven así:
 
@@ -74,7 +77,7 @@ Las primeras 3 Constantes de esta clase son las constantes de conexión las cual
 	
 Estas líneas dependen del gestor de base de datos que usemos pero para SQLITE (gestor que usamos en clases), serian estas líneas hay que tener cuidado con reemplazar en la URL la palabra "ejemplo" por el nombre de nuestra base de datos. (Si quisiéramos usar otro gestor de base de datos estas lineas 3 lineas deben ser modificadas pero el resto del programa permanece igual.)
 
--Variables de Sentencias SQL
+###-Variables de Sentencias SQL
 
 Las siguientes 5 líneas son las Sentencias SQL que usaremos para este ejemplo:
 
@@ -105,14 +108,15 @@ Esta es la sentencia de insertar, aquí la sentencia dice: "Inserta en la tabla 
 
 Estas sentencias las pongo juntas debido a que ambas tienen el riesgo de que si no agregas el WHERE del final "destruirás" la tabla.
 
-	SQL_UPDATE = "UPDATE [TABLA] SET [Columna] = ?";
+	SQL_UPDATE = "UPDATE [TABLA] SET [Columna] WHERE id = ?";
 	SQL_DELETE = "DELETE FROM [TABLA] WHERE id = ?";
 
 La sentencia UPDATE dice: " actualiza la tabla con la siguiente información"
 
 Mientras que la DELETE dice: "Borra de la tabla, el id siguiente."
 
---Métodos Para acceso a datos --ObtenerTodos()
+###--Métodos Para acceso a datos 
+####--ObtenerTodos()
 
 Siguiendo en las líneas ahora toca mirar los métodos que utilizó y el porqué de cada línea. El primer método de esta capa es ObtenerTodos() :
 
@@ -130,7 +134,11 @@ Siguiendo en las líneas ahora toca mirar los métodos que utilizó y el porqué
 	}
 	}
 
-Lo primero que tienes que ver es que es un método: -public (O sea que se puede acceder desde fuera de la clase). -Static (o sea que no requiere un objeto para poder llamarlo) -ArrayList (Significa que para cerrar el método debe haber un "return" de un arraylist del objeto clientes)
+Lo primero que tienes que ver es que es un método: 
+
+		-public (O sea que se puede acceder desde fuera de la clase). 
+		-Static (o sea que no requiere un objeto para poder llamarlo) 
+		-ArrayList (Significa que para cerrar el método debe haber un "return" de un arraylist del objeto clientes)
 
 Entrando en el método, lo primero que vemos es que hay un Try-catch pero que es una especial ya que su sintaxis es:
 
@@ -139,7 +147,11 @@ Entrando en el método, lo primero que vemos es que hay un Try-catch pero que es
 
 Esta es una try-with-resources, su gracia es que lo que se encuentra dentro del paréntesis se cierra automáticamente al terminar el bloque, los que nos ahorrará agregar todas las líneas de código para cerrar las consultas y todas las excepciones que esto nos dará.
 
-La primera línea dentro del paréntesis del try es: Connection con = obtenerConexion(); Esto es crear un Objeto Connection con el nombre con, que es iniciado con el método obtenerConexion(). Al ir a este método vemos que tiene la siguiente forma:
+La primera línea dentro del paréntesis del try es:
+
+	Connection con = obtenerConexion(); 
+		
+Esto es crear un Objeto Connection con el nombre con, que es iniciado con el método obtenerConexion(). Al ir a este método vemos que tiene la siguiente forma:
 
 	private static Connection obtenerConexion() {
 		Connection con = null;
@@ -185,11 +197,11 @@ Con esto hemos creado un método que devuelve un arraylist de objetos que están
 
 Ahora avanzaremos al siguiente método
 
---obtenerTodosAntesDeJava7()
+####--obtenerTodosAntesDeJava7()
 
 Este método se utiliza si no existieran los try-with-resources. pero cómo si existen ya no es necesario cerrar manualmente las conexiones a la base de datos.
 
--- obtenerPorId()
+####-- obtenerPorId()
 
 El segundo método es el ObtenerPorId, que a diferencia del método anterior, este devuelve solo una fila elegida por el id entregado, el método tiene esta forma.
 
@@ -219,8 +231,8 @@ funcionan exactamente igual a la explicación anterior. (la 1º genera la conexi
 La sentencia para darle los valores a la expresión "SQL_SELECT_ID" es la siguiente, en caso de ser un Integer o int. (el método usado depende del tipo de dato que pasaremos.)
 
 	ps.setInt(1, id);
-
-donde id, es la posición entregada como parámetro y el primer valor es el "parameterIndex" lo que podríamos traducir como la columna en la que queremos buscar.
+	
+donde el primer parametro "parameterIndex" indica a que simbolo de interrogacion debe remplazar, mientras que el segundo valor indica por que valor debe remplazarse.
 
 para luego ejecutar la sentencia con la línea:
 
@@ -244,7 +256,7 @@ y terminar el método introduciendo al objeto Cliente rellenado en el return
 
 Al final de todo explicare la excepción que creamos para el catch.
 
--- insertar()
+####-- insertar()
 
 Este método usa muchos términos que ya están explicados en los otros métodos por lo que será menos explicativo Aun así hay que notar que este método devuelve un objeto de tipo Cliente, así mismo como lo recibe como parámetro.
 
@@ -288,7 +300,7 @@ Las siguientes líneas son para rescatar el cliente generado y poder mostrarlo.
 	
 en estas líneas estamos solicitando el id autogenerado por la tabla y se lo insertamos con el setter del objeto cliente, para luego retornarlo y poder visualizarlo.
 
--- modificar()
+####-- modificar()
 
 Este método es muy similar al anterior.
 
@@ -323,7 +335,7 @@ finalmente ejecutamos la sentencia SQL
 	
 y retornamos el mismo objeto de tipo Cliente que entregamos. (nuevamente el return es para poder visualizar la información modificada.)
 
---borrar ()
+####--borrar ()
 
 Este es el método más corto y comparte casi todo con los métodos vistos antes.
 
@@ -351,9 +363,9 @@ y finalmente ejecutamos la sentencia:
 	ps.executeUpdate();
 	
 	
---Capa de Presentación. 
+##--Capa de Presentación. 
 
-	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java
+	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java
 
 
 Ahora que hemos generado los métodos para acceder a la información y la entidad que transporta los métodos podemos enfocarnos en la capa de presentación. (o sea, una capa donde solo ejecutaremos los métodos y podremos acceder a la información en muy pocas líneas.)
@@ -369,7 +381,7 @@ Ya comenzando a llamar a los métodos lo primero que se hizo fue crear un métod
 		System.out.println(cliente);
 	}
 	}
-Este es un método public, void y que no recibe parámetros. aquí generamos un ArrayList de tipo Cliente, para recibir el ArrayList que retorna el método obtenerTodos() y para imprimirlo en pantalla utilizamos un bucle for, que recorra el ArrayList y los imprima en pantalla.
+Este es un método private, void y que no recibe parámetros. aquí generamos un ArrayList de tipo Cliente, para recibir el ArrayList que retorna el método obtenerTodos() y para imprimirlo en pantalla utilizamos un bucle for, que recorra el ArrayList y los imprima en pantalla.
 
 Comenzando el método main, vemos que la primera línea es un bloque try-catch, que utilizaremos para atajar los errores que puedan salir.
 
@@ -406,13 +418,16 @@ finalmente utilizamos el método borrar() y le pasamos de parámetro el id del m
 	
 Este es el resumen de lo fundamental que vimos en la clase del viernes 30/04/21
 
---Anexo: Crear nuestra propia ExCEPTION. 
+## **Anexo:**
+Crear nuestra propia ExCEPTION. 
 
-	link: https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
+	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
 
 Lo primero que hacemos es en un bloque try-catch, en el apartado catch agregar la linea
 
-throw new AccesoDatosException("No se han podido obtener todos los clientes", e);
+	throw new AccesoDatosException("No se han podido obtener todos los clientes", e);
+	
 Ahora nos saltaran errores por usar AccesoDatosException sin que esta clase exista, pero dentro de las opciones generadas por eclipse o VSC, nos dirán que creemos esta clase. Como el programa detecta que queremos hacer una excepción nos crea la clase con el herencia de exceptions (si no, nosotros la agregamos), pero necesitamos que esta clase herede de RuntimeException, por lo que lo cambiamos. Ahora le heredamos los constructores de la clase padre.
+Finalmente agregamos nos dara la opcion de agregar el id
 
 y con esto tenemos nuestra Excepción creada.
