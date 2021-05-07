@@ -140,17 +140,11 @@ public class Pantalla_Juego2 {
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(frame, "Ganaste, cierra esto para jugar con mas frutas");
+					JOptionPane.showMessageDialog(frame, "Ganaste, felicidades.");
+					frame.dispose();
+					Pantalla_inicio.main(null);
 					
-					
-					String fruta=SeleccionFruta();
-					Pistas = listaPistas(fruta);
-					
-					//Estado inicial
-					Npistas.setText("3");
-					--i;
-					lbPista1.setText(Pistas.get(i));
-					lbNOportunidades.setText("3");
+				
 					
 				}
 

@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Pantalla_inicio {
 
@@ -42,7 +44,7 @@ public class Pantalla_inicio {
 	 * @throws ClassNotFoundException 
 	 */
 	public Pantalla_inicio() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		initialize();
 	}
 
@@ -51,17 +53,19 @@ public class Pantalla_inicio {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(64, 224, 208));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel PanelOpciones = new JPanel();
+		PanelOpciones.setBackground(new Color(107, 142, 35));
 		PanelOpciones.setBounds(10, 11, 414, 186);
 		frame.getContentPane().add(PanelOpciones);
 		PanelOpciones.setLayout(null);
 		
 		JButton btnJuego = new JButton("Juego1");
-		btnJuego.setIcon(new ImageIcon("C:\\Users\\curso\\JAVA-WORKSPACE\\SuperMercado\\src\\arena.png"));
+		btnJuego.setIcon(new ImageIcon("C:\\Users\\curso\\JAVA-WORKSPACE\\A\u00F1os\\src\\Img\\Bloques.png"));
 		btnJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -74,6 +78,7 @@ public class Pantalla_inicio {
 		PanelOpciones.add(btnJuego);
 		
 		JButton btnJuego_1 = new JButton("Juego2");
+		btnJuego_1.setIcon(new ImageIcon("C:\\Users\\curso\\JAVA-WORKSPACE\\A\u00F1os\\src\\Img\\Frutas.png"));
 		btnJuego_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pantalla_Juego2.main(null);
@@ -94,6 +99,7 @@ public class Pantalla_inicio {
 		PanelOpciones.add(btnJuego_3);
 		
 		JPanel PanelSalir = new JPanel();
+		PanelSalir.setBackground(new Color(255, 215, 0));
 		PanelSalir.setBounds(10, 208, 414, 42);
 		frame.getContentPane().add(PanelSalir);
 		PanelSalir.setLayout(null);
