@@ -5,8 +5,8 @@ En este curso se vieron apartados basicos de lenguaje Java, conexion y uso de ba
 
 asi los archivos y carpetas son los siguientes.
 
-    Java basico
-    Conexion con bases de datos
+    Lenguaje basico
+    Bases de datos
     Aplicaciones de escritorio
     Desarrollo web
   
