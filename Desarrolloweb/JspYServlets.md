@@ -1,4 +1,4 @@
-*JspYServlets*
+# JspYServlets
 
 Como vimos en la clase anterior podemos utilizar un servidor web para hacer pequeñas paginas web con html, 
 pero seria bastante util poder utilizar las herramientas de java para darle mayor personalizacion.
@@ -8,7 +8,7 @@ Los servlets son codigos de java que contienen fragmentos de html, mientras que 
 aunque suene confuso o redundante veremos unos ejemplos para entenderlo mejor.
 
 Antes que nada, ¿Como se crean estas "cosas"?
-**Crear proyecto**
+##Crear proyecto
 
 Como vimos anteriormente debemos crear un "Dynamic web project", acordandonos de lo visto anteriormente.
 Ahora con click derecho en la carpeta "WebContent" podemos crear nuestro archivo servlet o jsp.
@@ -16,7 +16,7 @@ Ahora con click derecho en la carpeta "WebContent" podemos crear nuestro archivo
 o en el peor de los casos descargar los plugins.
 
 lo primero que miraremos seran los Jsp
-**jsp**
+## jsp
 
 al crear el archivo .jsp veremos esto:
 
@@ -68,7 +68,7 @@ Con esto tendriamos una calculadora funciona.
 Pero sucede que si tuvieramos un archivo html muy grande y otro archivo java muy grande seria incomodo trabajar ambos a la vez, por lo que lo mas conveniente
 para grandes cantidades de codigo es separar el codigo, dejando el html en un .jsp y el codigo java en un servlets
 
-**servlets**
+## servlets
 
 ¿Entonces como creamos un servlets?
 Usaremos click derecho en el SRC, new sevelet
@@ -102,9 +102,39 @@ que venga del servlets
 
     ${resultado}
     
+De esta manera tendriamos el .jsp terminado, y nos tendriamos que enfocar en el servlets.
 
+Antes de empezar a editarlo es conveniente leer las lineas y entender mas o menos de donde viene cada cosa.
+la primera linea luego de los imports es
 
------Mañana sigo-----
+		@WebServlet("/servletsDePrueba")
+		
+Linea nos da la ubicacion de esta ventana (revisar).
+La siguente linea nos dice que nuestra clase extiende de HttpServlet la cual es una clase abstracta y por ende debes sobreescribir al menos uno de sus metodos.
+En este caso se sobreescribieron dos de los metodos.
+
+Bueno ahora tenemos los metodos doGet() y doPost(), y nosotros hemos rellenado el metodo doPost(), pero, ¿Que hacen estos metodos?
+
+El metodo doGet() es el metodo que por defecto corre cuando llamamos por url o de alguna manera al servlets.  
+Mientras que el metodo doPost() es el metodo que se utilizara cuando un formulario entra al servlets con un metodo "post".
+
+En metodo doGet() contiene esta linea
+
+		request.getRequestDispatcher("paginaRedireccionada.jsp").forward(request, response);
+		
+La que simplemente redirecciona a la pagina que introduzcas.
+
+mientras que el metodo doPost() contiene todo nuestro codigo anterior, pero ahora tenemos dos problemas.
+como transportamos la informacion del servlets a nuestro .jsp y como llegamos a nuestro .jsp
+
+Para esto usaremos dos lineas, 
+
+		request.setAttribute("resultado", resultado);
+		request.getRequestDispatcher("calculadoramvc.jsp").forward(request, response);
+
+la primera trabaja llevando el valor resultado a la clave "resultado" que tengamos en nuestro .jsp
+mientras que la segunda es una redireccion al igual que la vista antes.
+
 
 
     
