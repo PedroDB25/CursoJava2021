@@ -70,9 +70,13 @@ para grandes cantidades de codigo es separar el codigo, dejando el html en un .j
 
 ## servlets
 
-¿Entonces como creamos un servlets?
-Usaremos click derecho en el SRC, new sevelet
-(Puede suceder que nuevamente el archivo no este, por lo que tendras que buscar en otros, en el apartado web)
+Usaremose este link
+
+	https://github.com/javierlete/java-2021-04/blob/master/webbasica/src/com/ipartek/formacion/webbasica/CalculadoraCerebro.java
+
+¿Entonces como creamos un servlets?  
+Usaremos click derecho en el SRC, new sevelet.  
+(Puede suceder que nuevamente el archivo no este, por lo que tendras que buscar en otros, en el apartado web).  
 (si estas usando la ultima version de eclipse los imports te daran error y esto es debido a que el import que viene de javax ahora depende jakarta
 por lo que debes modificarlos)
 deben quedar de esta manera
@@ -129,11 +133,13 @@ como transportamos la informacion del servlets a nuestro .jsp y como llegamos a 
 
 Para esto usaremos dos lineas, 
 
-		request.setAttribute("resultado", resultado);
-		request.getRequestDispatcher("calculadoramvc.jsp").forward(request, response);
+			request.setAttribute("resultado", resultado);
+			request.getRequestDispatcher("calculadoramvc.jsp").forward(request, response);
 
 la primera trabaja llevando el valor resultado a la clave "resultado" que tengamos en nuestro .jsp
 mientras que la segunda es una redireccion al igual que la vista antes.
+
+De esta manera ya tendriamos un .jsp que trabaja con un servlets.
 
 
 
