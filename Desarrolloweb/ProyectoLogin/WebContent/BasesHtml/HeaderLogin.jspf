@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Basico</title>
+</head>
+<body>
+	<h1> Login basico </h1>
+	
+	<nav>
+		<ul>
+			<li>Opcion 1</li>
+			<li>Opcion 2</li>
+		
+		</ul>
+	</nav>
+<main>
