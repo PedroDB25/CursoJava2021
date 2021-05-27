@@ -1,0 +1,63 @@
+<%@page import="java.time.LocalDate"%>
+<div style="height: 10%;"></div>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Descripcion</th>
+			<th scope="col">marca</th>
+			<th scope="col">descuento</th>
+			<th scope="col">precio</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${CarritoProductos}" var="productos">
+			<tr>
+				<td>${productos.nombreProducto}</td>
+				<td>${productos.marca}</td>
+				<td>${productos.descuento}</td>
+				<td>${productos.precio}</td>
+			</tr>
+		</c:forEach>
+		<tr>
+			<td scope="col"></td>
+			<td scope="col"></td>
+			<td scope="col"></td>
+			<td scope="col"></td>
+		</tr>
+		<tr>
+
+			<td scope="col"></td>
+			<td scope="col"></td>
+			<td scope="col">Total Parcial: $</td>
+			<td scope="col">${totalAPagar}</td>
+
+		</tr>
+
+		<tr>
+
+			<td scope="col"></td>
+			<td scope="col"></td>
+			<td scope="col">IVA 21% $</td>
+			<td scope="col">${PagoIva}</td>
+		<tr>
+
+			<td scope="col"></td>
+			<td scope="col"></td>
+			<td scope="col">Total: $</td>
+			<td scope="col">${TotalMasIva}</td>
+
+		</tr>
+
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>

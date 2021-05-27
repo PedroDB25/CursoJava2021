@@ -1,0 +1,37 @@
+<%@page import="java.time.LocalDate"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<title>Factura <%=LocalDate.now() %></title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<div style="height: 1000px; width: 95%; display: inline; justify-content: center;">
+<div style="background: blue; height: 10px;"></div>
+<div style="display: flex; justify-content: center;height: 90%;">
+<div>
+<div style="height: 10%; display: flex;">
+<div style="width: 50%;">
+<h1 style="font-size:3em;">Factura</h1>
+</div>
+<div style="width: 50%;display: flex;justify-content: center;">
+<img alt="Logo" src="Img/LogoMascotas.png">
+</div>
+</div>
+<div style="height: 5%"></div>
+<div style="height: 10%; display: flex;">
+<div style="width: 50%;font-size: small;">
+<ul style="list-style: none;">
+<li>Tienda de mascotas</li>
+<li> C/ De La tienda</li>
+<li>CP Ciudad provincia</li>
+<li><%=LocalDate.now() %></li>
+
+
+</ul>
+</div>

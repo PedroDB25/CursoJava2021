@@ -1,0 +1,8 @@
+<div style="width: 50%; justify-content: ">
+	<ul style="list-style: none">
+		<li>${cliente.id}</li>
+		<li>${cliente.nombre}</li>
+		<li>${cliente.email}</li>
+	</ul>
+</div>
+</div>
