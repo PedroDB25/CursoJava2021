@@ -1,3 +1,5 @@
+Este es un ejemplo de la creacion de un DAO utilizando JDBC, es importante notar que esto es un ejemplo y hay mejores formas de hacerlo
+El ejemplo trata de tener una base de datos con clientes y poder realizar las 4 operaciones basicas desde java CRUD (insertar, ver, modificar y borrar) datos.
 
 ## Índice: 
 
@@ -36,8 +38,9 @@ Esta guía es para poder practicar la conexión con la base de datos SQLITE o My
 
 Lo primero que necesitas es descargar el driver que conecta java con SQLITE desde la pagina: 
 
-	https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc 
-	https://mvnrepository.com/artifact/mysql/mysql-connector-java/
+[Libreria para SQLite](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc)  
+	
+[Libreria para MySQL](https://mvnrepository.com/artifact/mysql/mysql-connector-java) 
 	
 En esta pagina buscas el ultimo, abres la pagina y luego apretas el jar (Esta en la tabla en el campo de FILE)
 
@@ -72,14 +75,14 @@ Con la configuración hecha y una base de datos podemos empezar a programar.
 
 ## Crear Entidad
 
-	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java
+[Codigo clase Cliente](https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/entidades/Cliente.java)	
 
 
 Lo primero que haremos es crear una clase para depositar los datos. Esta clase se creará en un paquete dentro de SRC que se llamará "entidades". La clase debe tener las mismas variables que columnas creadas en la tabla. Creamos los Gettets y Setters, un constructor con todas las variables y un método ToString() para visualizar los datos, es recomendable que agregues los métodos "equals()" y "hashcode".
 
 ## Capa de acceso a datos (Dal)
 
-	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java
+[Codigo de acceso a datos](https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/DaoCliente.java) 
 
 ### Variables de conexion
 
@@ -126,7 +129,8 @@ Aquí la sentencia quiere decir: "Selecciona las columnas que te digo de esta ta
 ```
 La sentencia WHERE esta para dar la condición, o sea esta sentencia dice: "Dame todas las columnas y entre ellas elige la fila que tenga el id que te digo" Recordar que las interrogaciones son para dejar un espacio donde agregar datos luego.
 ```SQL
-	SQL_INSERT = "INSERT INTO [TABLA] ([Columnas_a_rellenar]) VALUES ([Tantas "?" como columnas pusiste antes separadas por comas])";
+	SQL_INSERT = "INSERT INTO [TABLA] ([Columnas_a_rellenar]) 
+	VALUES ([Tantas "?" como columnas pusiste antes separadas por comas])";
 ```
 Esta es la sentencia de insertar, aquí la sentencia dice: "Inserta en la tabla y en las siguientes columnas estos valores"
 
@@ -390,7 +394,8 @@ y finalmente ejecutamos la sentencia:
 ```	
 ## Capa de Presentación 
 
-	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java
+[Capa de presentacion](https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/presentacion/consola/Presentacion.java)
+	
 
 
 Ahora que hemos generado los métodos para acceder a la información y la entidad que transporta los métodos podemos enfocarnos en la capa de presentación. (o sea, una capa donde solo ejecutaremos los métodos y podremos acceder a la información en muy pocas líneas.)
@@ -446,7 +451,8 @@ finalmente utilizamos el método borrar() y le pasamos de parámetro el id del m
 ## **Anexo:**
 Crear nuestra propia EXCEPTION. 
 
-	https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java
+[Codigo de EXCEPTION](https://github.com/javierlete/java-2021-04/blob/master/BasesDeDatos/src/com/ipartek/formacion/jdbc/clientes/accesodatos/AccesoDatosException.java)
+	
 
 Lo primero que hacemos es en un bloque try-catch, en el apartado catch agregar la linea
 ```Java
