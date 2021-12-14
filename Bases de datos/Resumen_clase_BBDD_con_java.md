@@ -17,7 +17,7 @@
 	-Anexo
 
 
-Esta guía es para poder practicar la conexión con la base de datos SQLITE, es importante ir mirando los archivos subidos al github mientras avanzamos.
+Esta guía es para poder practicar la conexión con la base de datos SQLITE o MySQL, es importante ir mirando los archivos subidos al github mientras avanzamos.
 
 
 ## Configuración
@@ -26,6 +26,7 @@ Esta guía es para poder practicar la conexión con la base de datos SQLITE, es 
 Lo primero que necesitas es descargar el driver que conecta java con SQLITE desde la pagina: 
 
 	https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc 
+	https://mvnrepository.com/artifact/mysql/mysql-connector-java/
 	
 En esta pagina buscas el ultimo, abres la pagina y luego apretas el jar (Esta en la tabla en el campo de FILE)
 
@@ -41,19 +42,19 @@ Con el archivo en el proyecto debes configurar el BuildPath para que java pueda 
 		-VSC: cuando creas el proyecto Java abajo en la barra de explorador debe aparecer una barra
 		que dice JAVA proyects ahi puedes referenciar la librería del .jar
 
-Con la configuración creada ya podemos crear la base de datos, para esto usamos en clase DBeaver, pero se puede usar cualquier herramienta para administrar bases de datos por ejemplo SQLBrowser.
+Con la configuración lista, podemos crear la base de datos, para esto usamos en DBeaver, sqlite browser o el CMD en el pero de lo casos, pero se puede usar cualquier herramienta para administrar bases de datos por ejemplo.
 
 
 ## Crear Base de datos
-
 
 Si no quieres crearla, puedes descargarla de aqui: 
 
 	https://github.com/javierlete/java-2021-04/tree/master/BasesDeDatos 
 	
-y ponerla en tu proyecto el archivo es: tienda.db
+y ponerla en tu proyecto el archivo es: tienda.db, ponla en el raiz de tu proyecto.
+Si usas MySQL carga esta base de datos en tu aplicacion Xampp.
 
-Para el ejemplo creamos una tabla "tienda.db" que tiene 3 columnas (id, nombre, apellido) usaremos el dato id de primary key (lo que significa que este es el único dato que no puede repetirse.) Además le añadiremos la opción de ser autoincremental. (por lo que la base de datos lo añadirá por sí sola, cada vez que agreguemos alguien a la tabla.)
+Para el ejemplo creamos una tabla "tienda.db" que tiene 3 columnas (id, nombre, apellido) usaremos el dato id de primary key (lo que significa que este es el único dato que no puede repetirse y ademas no puede ser nulo). Además le añadiremos la opción de ser autoincremental. (por lo que la base de datos lo añadirá por sí sola, cada vez que agreguemos alguien a la tabla).
 
 Con la configuración hecha y una base de datos podemos empezar a programar.
 
@@ -73,13 +74,20 @@ Lo primero que haremos es crear una clase para depositar los datos. Esta clase s
 
 Con la entidad terminada, crearemos la capa de "acceso a datos" la que llamamos "Dal". (data access layer) Para esto crearemos una clase llamada Dao con un sufijo deseado (Puede ser DaoRopa, DaoCasa, DaoClientes, Etc...) La Clase Dao empieza como todas las clases definiendo las Constantes y variables.
 
-Las primeras 3 Constantes de esta clase son las constantes de conexión las cuales son URL, USUARIO y PASSWORD. estas se ven así:
+Las primeras 3 Constantes de esta clase son las constantes de conexión las cuales son URL, USUARIO y PASSWORD. estas se ven así para SQLite:
 
 	private static final String URL = "jdbc:sqlite:ejemplo.db";
 	private static final String USUARIO = "";
 	private static final String PASSWORD = "";
 	
-Estas líneas dependen del gestor de base de datos que usemos pero para SQLITE (gestor que usamos en clases), serian estas líneas hay que tener cuidado con reemplazar en la URL la palabra "ejemplo" por el nombre de nuestra base de datos. (Si quisiéramos usar otro gestor de base de datos estas lineas 3 lineas deben ser modificadas pero el resto del programa permanece igual.)
+Y asi para MySQL:
+	
+	private static final String URL = "jdbc:mysql://localhost/ejemplo";
+	private static final String USUARIO = "root";
+	private static final String PASSWORD = "";
+	
+Estas líneas dependen del gestor de base de datos que usemos pero para SQLITE y MySQL, serian estas líneas hay que tener cuidado con reemplazar en la URL la palabra "ejemplo" por el nombre de nuestra base de datos. 
+(Si quisiéramos usar otro gestor de base de datos estas 3 lineas deben ser modificadas pero el resto del programa permanece igual.)
 
 ### Variables de Sentencias SQL
 
@@ -93,8 +101,8 @@ Las siguientes 5 líneas son las Sentencias SQL que usaremos para este ejemplo:
 	
 Notar que las interrogaciones "?" son puntos donde luego insertamos datos. 
 
-
-Para un mejor entendimiento la sintaxis de cada operación sería: (Esta parte puedes saltarla si sabes de SQL, puedes saltar a la línea 115)
+Para un mejor entendimiento la sintaxis de cada operación sería: 
+(Esta parte puedes saltarla si sabes de SQL, puedes saltar al siguiente punto)
 
 (La sentencia debe quedar igual a las de arriba, cualquier símbolo extra los agregue para poder separar conceptos)
 
@@ -141,15 +149,15 @@ Siguiendo en las líneas ahora toca mirar los métodos que utilizó y el porqué
 Lo primero que tienes que ver es que es un método: 
 
 		-public (O sea que se puede acceder desde fuera de la clase). 
-		-Static (o sea que no requiere un objeto para poder llamarlo) 
+		-Static (o sea que no requiere un objeto para poder llamarlo y pertenece a la clase) 
 		-ArrayList (Significa que para cerrar el método debe haber un "return" de un arraylist del objeto clientes)
 
-Entrando en el método, lo primero que vemos es que hay un Try-catch pero que es una especial ya que su sintaxis es:
+Entrando en el método, lo primero que vemos es que hay un Try-catch pero es uno especial ya que su sintaxis es:
 
 	try(){
 	}catch{}
 
-Esta es una try-with-resources, su gracia es que lo que se encuentra dentro del paréntesis se cierra automáticamente al terminar el bloque, los que nos ahorrará agregar todas las líneas de código para cerrar las consultas y todas las excepciones que esto nos dará.
+Este es un try-with-resources, su gracia es que lo que se encuentra dentro del paréntesis se cierra automáticamente al terminar el bloque, los que nos ahorrará agregar todas las líneas de código para cerrar las consultas y todas las excepciones que esto nos dará.
 
 La primera línea dentro del paréntesis del try es:
 
@@ -167,8 +175,7 @@ Esto es crear un Objeto Connection con el nombre con, que es iniciado con el mé
 		return con;
 	}
 
-Vemos que es un método privado (no se puede llamar fuera de esta clase) y devuelve un objeto tipo Connection Este método inicia creando un objeto vacío de tipo Connection el cual rellenaremos en este método. Aquí encontramos un try-catch normal, pero con la particularidad de que le agregamos al bloque catch una excepciones que creamos nosotros "AccesoDatosException".
-
+Vemos que es un método privado (no se puede llamar fuera de esta clase) y devuelve un objeto tipo Connection. Este método inicia creando un objeto vacío de tipo Connection el cual rellenaremos en este método. Aquí encontramos un try-catch normal, pero con la particularidad de que le agregamos al bloque catch una excepciones que creamos nosotros "AccesoDatosException". Pero puede ser una excepcion normal.
 (Para no salir mucho del tema esta excepción la trataré en un anexo al final de este texto.)
 
 Ya dentro del bloque try le damos al objeto "con" las variables que definimos al principio, para que pueda realizar la conexión. y si es que no se genera una excepción retornaremos una conexión con la base de datos.
