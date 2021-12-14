@@ -1,33 +1,33 @@
 	
 ## Índice: 
 
-[-Configuración](/#Configuración)
+[-Configuración](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Configuración)
 
-[-Crear base de datos](/#Crear base de datos)
+[-Crear base de datos](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Crear-base-de-datos)
 
-[-Crear Entidades](/#Crear Entidades)
+[-Crear Entidades](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Crear-Entidades)
 
-[-Capa de acceso a datos](#Capa de acceso a datos)
+[-Capa de acceso a datos](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Capa-de-acceso-a-datos)
 
-[-Variables de conexion](#Variables de conexion)
+[-Variables de conexion](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Variables-de-conexion)
 
-[-Variables de Sentencias SQL](#Variables de Sentencias SQL)
+[-Variables de Sentencias SQL](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Variables-de-Sentencias-SQL)
 
-[-Métodos Para acceso a datos](#Métodos Para acceso a datos)
+[-Métodos Para acceso a datos](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.mdMétodos-Para-acceso-a-datos)
 
-[-ObtenerTodos()](/#ObtenerTodos)
+[-ObtenerTodos()](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#ObtenerTodos)
 
-[-ObtenerPorId()](/#ObtenerPorId)
+[-ObtenerPorId()](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#ObtenerPorId)
 
-[-Insertar()](/#Insertar)
+[-Insertar()](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Insertar)
 
-[-Modificar()](/#Modificar)
+[-Modificar()](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Modificar)
 
-[-Borrar()](/#Borrar)
+[-Borrar()](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Borrar)
 
-[-Capa de Presentación](/#Capa de Presentación)
+[-Capa de Presentación](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#capa-de-presentaci%C3%B3n)
 
-[-Anexo](/#Anexo)
+[-Anexo](https://github.com/PedroDB25/CursoJava2021/blob/main/Bases%20de%20datos/Resumen_clase_BBDD_con_java.md#Anexo)
 
 Esta guía es para poder practicar la conexión con la base de datos SQLITE o MySQL, es importante ir mirando los archivos subidos al github mientras avanzamos.
 
