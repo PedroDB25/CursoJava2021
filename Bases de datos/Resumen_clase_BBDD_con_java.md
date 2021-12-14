@@ -100,7 +100,7 @@ Y asi para MySQL:
 	private static final String URL = "jdbc:mysql://localhost/ejemplo";
 	private static final String USUARIO = "root";
 	private static final String PASSWORD = "";
-```	
+```		
 Estas líneas dependen del gestor de base de datos que usemos pero para SQLITE y MySQL, serian estas líneas hay que tener cuidado con reemplazar en la URL la palabra "ejemplo" por el nombre de nuestra base de datos. 
 (Si quisiéramos usar otro gestor de base de datos estas 3 lineas deben ser modificadas pero el resto del programa permanece igual.)
 
@@ -182,6 +182,11 @@ La primera línea dentro del paréntesis del try es:
 Esto es crear un Objeto Connection con el nombre con, que es iniciado con el método obtenerConexion(). Al ir a este método vemos que tiene la siguiente forma:
 ```Java
 	private static Connection obtenerConexion() {
+		try {
+			Class.forName(Ejemplo);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
@@ -191,6 +196,12 @@ Esto es crear un Objeto Connection con el nombre con, que es iniciado con el mé
 		return con;
 	}
 ```
+Si tienes dudas con este metodo recuerda sustituir el "Ejemplo" por :
+
+Para MySQL <code>"com.mysql.jdbc.Driver"</code>
+Para SQLite <code>"org.sqlite.JDBC"</code>
+
+
 Vemos que es un método privado (no se puede llamar fuera de esta clase) y devuelve un objeto tipo Connection. Este método inicia creando un objeto vacío de tipo Connection el cual rellenaremos en este método. Aquí encontramos un try-catch normal, pero con la particularidad de que le agregamos al bloque catch una excepciones que creamos nosotros "AccesoDatosException". Pero puede ser una excepcion normal.
 (Para no salir mucho del tema esta excepción la trataré en un anexo al final de este texto.)
 
